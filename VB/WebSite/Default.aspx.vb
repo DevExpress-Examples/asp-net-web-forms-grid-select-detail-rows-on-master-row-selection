@@ -8,13 +8,12 @@ Imports System.Web.UI
 Imports System.Web.UI.WebControls
 Imports System.Web.UI.WebControls.WebParts
 Imports System.Web.UI.HtmlControls
-Imports DevExpress.Web.ASPxGridView
+Imports DevExpress.Web
 
 Partial Public Class Grid_MasterDetail_SelectDetailRows_Default
     Inherits System.Web.UI.Page
 
-    Protected Overrides Sub OnLoad(ByVal e As EventArgs)
-        MyBase.OnLoad(e)
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs)
         If Not IsPostBack Then
             master.DataBind()
             master.DetailRows.ExpandRow(0)
@@ -27,13 +26,11 @@ Partial Public Class Grid_MasterDetail_SelectDetailRows_Default
     Protected Sub master_CustomCallback(ByVal sender As Object, ByVal e As ASPxGridViewCustomCallbackEventArgs)
         Dim data() As String = e.Parameters.Split("|"c)
         If data.Length = 3 AndAlso data(0) = "select" Then
-            ProcessSelection(Integer.Parse(data(1)), data(2) = "T")
+            ProcessDetailSelection(Integer.Parse(data(1)), data(2) = "T")
         End If
     End Sub
 
-    Private Sub ProcessSelection(ByVal index As Integer, ByVal state As Boolean)
-        master.DataBind()
-        master.Selection.SetSelection(index, state)
+    Private Sub ProcessDetailSelection(ByVal index As Integer, ByVal state As Boolean)
         Dim detail As ASPxGridView = TryCast(master.FindDetailRowTemplateControl(index, "detail"), ASPxGridView)
         If detail IsNot Nothing Then
             If state Then

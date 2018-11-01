@@ -1,8 +1,7 @@
-﻿<%-- BeginRegion Page setup --%>
-<%@ Page Language="vb" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="Grid_MasterDetail_SelectDetailRows_Default" %>
-<%@ Register Assembly="DevExpress.Web.v13.1" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dxwgv" %>
-<%@ Register Assembly="DevExpress.Web.v13.1" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
-<%-- EndRegion --%>
+﻿<%@ Page Language="vb" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="Grid_MasterDetail_SelectDetailRows_Default" %>
+
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
@@ -11,51 +10,35 @@
 <body>
     <form id="form1" runat="server">
 		<script type="text/javascript">
-			function master_RowSelecting(index, state) {
-				master.PerformCallback("select|" + index + "|" + (state ? "T" : ""));
+			function onMasterGridSelectionChanged(s, e) {
+			    master.PerformCallback("select|" + e.visibleIndex + "|" + (e.isSelected ? "T" : ""));
 			}
 		</script>
-		<dxwgv:ASPxGridView ID="master" runat="server" AutoGenerateColumns="False" DataSourceID="masterData" KeyFieldName="CategoryID"
+		
+        <dx:ASPxGridView ID="master" runat="server" AutoGenerateColumns="False" DataSourceID="masterData" KeyFieldName="CategoryID"
 			ClientInstanceName="master" OnCustomCallback="master_CustomCallback">
 			<SettingsDetail ShowDetailRow="True" />
+            <ClientSideEvents SelectionChanged="onMasterGridSelectionChanged" />
 			<Columns>
-				<%-- BeginRegion Custom selection check --%>
-				<dxwgv:GridViewDataColumn VisibleIndex="0">
-					<DataItemTemplate>
-						<input type="checkbox"
-							onclick="master_RowSelecting(<%#Container.VisibleIndex%>, checked)" 
-							<%#If(master.Selection.IsRowSelected(Container.VisibleIndex), "checked=""checked""", "")%> />
-					</DataItemTemplate>
-				</dxwgv:GridViewDataColumn>
-				<%-- EndRegion --%>
-				<dxwgv:GridViewDataTextColumn FieldName="CategoryID" ReadOnly="True" VisibleIndex="1">
-					<EditFormSettings Visible="False" />
-				</dxwgv:GridViewDataTextColumn>
-				<dxwgv:GridViewDataTextColumn FieldName="CategoryName" VisibleIndex="2">
-				</dxwgv:GridViewDataTextColumn>
+                <dx:GridViewCommandColumn ShowSelectCheckbox="true" VisibleIndex="0" />
+				<dx:GridViewDataTextColumn FieldName="CategoryID" ReadOnly="True" VisibleIndex="1" />
+				<dx:GridViewDataTextColumn FieldName="CategoryName" VisibleIndex="2" />
 			</Columns>
-			<%-- BeginRegion Templates --%>
 			<Templates>
 				<DetailRow>
-					<dxwgv:ASPxGridView ID="detail" runat="server" AutoGenerateColumns="False"
+					<dx:ASPxGridView ID="detail" runat="server" AutoGenerateColumns="False"
 						DataSourceID="detailData" KeyFieldName="ProductID" OnBeforePerformDataSelect="detail_BeforePerformDataSelect">
 						<Columns>
-							<dxwgv:GridViewCommandColumn ShowSelectCheckbox="true" VisibleIndex="0" />
-							<dxwgv:GridViewDataTextColumn FieldName="ProductID" ReadOnly="True" VisibleIndex="1">
-								<EditFormSettings Visible="False" />
-							</dxwgv:GridViewDataTextColumn>
-							<dxwgv:GridViewDataTextColumn FieldName="ProductName" VisibleIndex="2">
-							</dxwgv:GridViewDataTextColumn>
-							<dxwgv:GridViewDataTextColumn FieldName="UnitPrice" VisibleIndex="3">
-							</dxwgv:GridViewDataTextColumn>
+							<dx:GridViewCommandColumn ShowSelectCheckbox="true" VisibleIndex="0" />
+							<dx:GridViewDataTextColumn FieldName="ProductID" ReadOnly="True" VisibleIndex="1" />
+							<dx:GridViewDataTextColumn FieldName="ProductName" VisibleIndex="2" />
+							<dx:GridViewDataTextColumn FieldName="UnitPrice" VisibleIndex="3" />
 						</Columns>
-					</dxwgv:ASPxGridView>
+					</dx:ASPxGridView>
 				</DetailRow>
 			</Templates>
-			<%-- EndRegion --%>
-		</dxwgv:ASPxGridView>
-
-		<%-- BeginRegion DataSources --%>
+		</dx:ASPxGridView>
+		
 		<asp:AccessDataSource ID="masterData" runat="server" DataFile="~/App_Data/nwind.mdb"
 			SelectCommand="SELECT [CategoryID], [CategoryName] FROM [Categories]"></asp:AccessDataSource>			
 		<asp:AccessDataSource ID="detailData" runat="server" DataFile="~/App_Data/nwind.mdb"
@@ -63,8 +46,7 @@
 			<SelectParameters>				
 				<asp:Parameter Name="CategoryID" />				
 			</SelectParameters>
-		</asp:AccessDataSource>
-		<%-- EndRegion --%>			
+		</asp:AccessDataSource>	
     </form>
 </body>
 </html>
