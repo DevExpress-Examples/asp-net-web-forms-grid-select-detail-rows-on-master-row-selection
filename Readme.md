@@ -9,6 +9,8 @@ This example demonstrates how to select or deselect rows in a detail grid when m
 
 ## Overview
 
+Follow the steps below to implement master-detail functionality and select or deselect detail rows based on the master row's selection state:
+
 1. Create a master grid control, set the [ShowDetailRow](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridViewDetailSettings.ShowDetailRow) property to `true`, specify the grid's [Templates.DetailRow](https://docs.devexpress.com/AspNet/DevExpress.Web.GridViewTemplates.DetailRow) property, and add a detail grid to the template. For both grid controls, set the [ShowSelectCheckbox](https://docs.devexpress.com/AspNet/DevExpress.Web.GridViewCommandColumn.ShowSelectCheckbox) property to `true` to enable selection.
 
     ```aspx
