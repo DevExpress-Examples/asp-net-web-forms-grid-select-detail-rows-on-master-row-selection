@@ -10,7 +10,7 @@
 <!-- default file list end -->
 # How to select detail rows on master row selection
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e355)**
+**[[Run Online]](https://codecentral.devexpress.com/128542373/)**
 <!-- run online end -->
 
 
