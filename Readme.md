@@ -9,9 +9,6 @@
 * [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
 <!-- default file list end -->
 # How to select detail rows on master row selection
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128542373/)**
-<!-- run online end -->
 
 
 <p>This example shows how to select rows in a detail grid when the master row selection is changed.</p>
