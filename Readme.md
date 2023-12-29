@@ -4,9 +4,6 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 # Grid View for ASP.NET Web Forms - Select detail rows on master row selection
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128542373/)**
-<!-- run online end -->
 
 This example demonstrates how to select or deselect rows in a detail grid when master row selection changes.
 
